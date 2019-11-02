@@ -26,7 +26,7 @@ class Solution{
 		for (int i = 0; i < teams.length; i++) {
 			int max = i;
 			for (int j = i+1; j < teams.length; j++) {
-				if (teams[j].compareTo(teams[max]) == -1) {
+				if (teams[j].compareTo(teams[max]) == 1) {
 					max = j;
 				}
 			}
@@ -74,17 +74,17 @@ class Team implements Comparable<Team> {
 	 */
 	public int compareTo (Team that) {
 		if (this.noOfWins > that.noOfWins) {
-			return -1;
-		}
-		else if (this.noOfWins < that.noOfWins) {
 			return 1;
 		}
+		else if (this.noOfWins < that.noOfWins) {
+			return -1;
+		}
 		else {
-			if (this.noOfLosses > that.noOfLosses) return 1;
-			else if (this.noOfLosses < that.noOfLosses) return -1;
+			if (this.noOfLosses > that.noOfLosses) return -1;
+			else if (this.noOfLosses < that.noOfLosses) return 1;
 			else {
-				if (this.noOfDraws > that.noOfDraws) return -1;
-				else if (this.noOfDraws < that.noOfDraws) return 1;
+				if (this.noOfDraws > that.noOfDraws) return 1;
+				else if (this.noOfDraws < that.noOfDraws) return -1;
 				else return 0;
 			}
 		}
