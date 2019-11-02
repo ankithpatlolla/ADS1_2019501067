@@ -6,7 +6,6 @@ class Node {
 		this.next = null;
 	}
 }
-
 class Queue {
 	Node head;
 	Node tail;
@@ -26,6 +25,7 @@ class Queue {
 	public int dequeue () {
 		Node temp = head;
 		head = head.next;
+		size--;
 		return temp.data;
 	}
 }
@@ -36,11 +36,14 @@ class Solution{
 		for (int i = 0; i < a; i++) {
 			queue.enqueue(i);
 		}
-		for (int i = 0; i < a; i++) {
-			if (i == b) {
-				String s += queue.dequeue();
+		while (size > 0) {
+			for (int i = 0; i < size; i++) {
+				if (i == b) {
+					String s += queue.dequeue();
+				} else {
+					int num = dequeue();
+				}
 			}
-		}
-		return "";
+			return "";
 	}
 }
