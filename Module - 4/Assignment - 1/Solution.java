@@ -1,16 +1,16 @@
 /**
  * main class.
  * @author Ankith.
- * complexity is NlogN.
+ * complexity is O(N^2).
+ * not a stable algorithm but in place.
+ * 
  */
 class Solution {
 	private Solution() {
 	}
 	/**
-	 * function to call pass the array to the sub functions.
-	 * boxes and unboxes the array.
-	 *
-	 * @param arr the array that is being passed.
+	 * method to sort the array.
+	 * @param arr the array that is to be sorted..
 	 * @return the sorted array.
 	 */
 	public static int[] quickSort(int[] arr) {
@@ -19,11 +19,10 @@ class Solution {
 	}
 
 	/**
-	 * function to sort the array in ascending order recursively.
-	 *
-	 * @param arr the array to be sorted.
-	 * @param lo the starting position of the array.
-	 * @param hi the ending position of the array.
+	 * recurssive method to sort the arrayy.
+	 * @param arr the array thaat is to be sorted.
+	 * @param lo starting position of the array.
+	 * @param hi ending position of the array.
 	 */
 	private static void sort(int[] arr, int lo, int hi) {
 		if (hi <= lo) {
@@ -38,9 +37,10 @@ class Solution {
 	 * function to divide the function based on the pivot position.
 	 *
 	 * @param arr the array to be sorted.
-	 * @param lo the position of the starting element.
-	 * @param hi the position of the last element.
-	 * @return the
+	 * @param lo  position of the initial element.
+	 * @param hi  position of the last element.
+	 * @return the jth index.
+	 * complexity is O(N^2)
 	 */
 	private static int partition(int[] arr, int lo, int hi) {
 		int i = lo;

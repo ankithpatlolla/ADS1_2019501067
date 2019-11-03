@@ -1,7 +1,8 @@
 /**
  * main class.
  * @author Ankith.\
- * complexity NlogN.
+ * complexity O(NlogN).
+ * not a in place algorithm. stable.
  */
 class Solution {
 	private Solution() {
@@ -26,6 +27,7 @@ class Solution {
 	 * @param aux auxiliary array for temporary storage of elements.
 	 * @param lo the starting position of the array.
 	 * @param hi the ending position of the array.
+	 * complexity is 1
 	 */
 	private static void sort(String[] arr, String[] aux,
 				int lo, int hi) {

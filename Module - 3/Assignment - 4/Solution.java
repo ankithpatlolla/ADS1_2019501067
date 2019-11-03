@@ -9,6 +9,7 @@ class Solution{
 	 * @param arr array which elements to be swapped.
 	 * @param i index.
 	 * @param j index.
+	 * Complexity is O(1).
 	 */
 	public void swap (Team[] arr, int i, int j) {
 		Team temp = arr[i];
@@ -20,7 +21,7 @@ class Solution{
 	 * I used selection sort to sort the teams array.
 	 * @param teams Team array that is to be sorted.
 	 * @return sorted team arrayy.
-	 * complexity is N^2.
+	 * complexity is O(N^2).
 	 */
 	public Team[] sort(Team[] teams){
 		// your code goes here

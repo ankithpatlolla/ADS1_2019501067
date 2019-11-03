@@ -20,7 +20,8 @@ class Solution{
 	 * 
 	 * we use two for loops iterating through length of an array
 	 * the time complexity of this sort is N in best case and N^2 worst case.
-	 * complexity is N logN.
+	 * complexity is O(N^2).
+	 * stable algorithm and in place.
 	 * 
 	 */
 	public int[] sortInsertion(final int[] arr){
@@ -46,7 +47,8 @@ class Solution{
 	 * we use this method to sort array.
 	 * we use two for loops which irritate through length of an array
 	 * the complexity for this sort is N^2 in both best and worst cases.
-	 * complexity is N^2.
+	 * complexity is O(N^2).
+	 * in place algortihm not a stable.
 	 */
 	public int[] sortSelection(final int[] arr){
 		// fill you code Here

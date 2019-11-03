@@ -1,49 +1,41 @@
-class Node {
-	int data;
-	Node next;
-	Node (int data) {
-		this.data = data;
-		this.next = null;
-	}
-}
-class Queue {
-	Node head;
-	Node tail;
-	int size;
-	public void enqueue (int data) {
-		Node node = new Node(data);
-		if (tail == null) {
-			tail = node;
-			head = node;
-			size++;
-		} else {
-			tail.next = node;
-			tail = tail.next;
-			size++;
-		}
-	}
-	public int dequeue () {
-		Node temp = head;
-		head = head.next;
-		size--;
-		return temp.data;
-	}
-}
+/**
+ * class solution. main class.
+ * @author Ankith.
+ */
 class Solution{
+	/**
+	 * method Josephus.
+	 * @param a,b the prameters for the methods.
+	 * @return string with all the popped items. 
+	 * complexity is O(N).
+	 */
 	public static String Josephus(int a, int b){
-		// fill you code Here
-		Queue queue = new Queue();
+		
+		CircleList queue = new CircleList();
+
 		for (int i = 0; i < a; i++) {
 			queue.enqueue(i);
 		}
-		while (size > 0) {
-			for (int i = 0; i < size; i++) {
-				if (i == b) {
-					String s += queue.dequeue();
-				} else {
-					int num = dequeue();
-				}
+		queue.linkCircle();
+		int pos = 1;
+		int poppedItems = 0;
+		String res = "";
+		Node temp = queue.head;
+		while (poppedItems != a) {
+			temp = temp.next;
+			pos++;
+
+			if(pos == b) {
+				pos = 1;
+				res += temp.data + " "; 
+				temp.prev.next = temp.next;
+				temp.next.prev = temp.prev;
+
+				poppedItems++;
+				temp = temp.next;
 			}
-			return "";
+		}
+		return res.trim();
+		// return res;
 	}
 }
