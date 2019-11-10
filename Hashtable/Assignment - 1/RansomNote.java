@@ -33,10 +33,10 @@ public static void main(String[] args) {
     String sent = sc.nextLine();
     String[] words = sent.split(" ");
     boolean flag = true;
-    for (String string : words) {
-        if (obj.get(string) != null) {
-            obj.put(string,obj.get(string) - 1);
-            if (obj.get(string) < 0) {
+    for (String wrd : words) {
+        if (obj.get(wrd) != null) {
+            obj.put(wrd,obj.get(wrd) - 1);
+            if (obj.get(wrd) < 0) {
                 flag = false;
                 break;
             }
