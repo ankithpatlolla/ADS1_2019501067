@@ -1,6 +1,9 @@
 
 import java.util.*;
 import java.io.*;
+/**
+* class student.
+ */
 class Student implements Comparable<Student>{
 	String name;
 	String dob;
@@ -39,7 +42,7 @@ class Student implements Comparable<Student>{
 		 } else if (this.dob < that.dob) {
 			 return -1
 		 }
-        return -1;
+        return 0;
     }
     
 }
