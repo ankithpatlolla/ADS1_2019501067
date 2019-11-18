@@ -1,0 +1,12 @@
+* First i initalised an array with int values.
+* Then i inserted array elements into maxpq and minpq.
+    we use a for loop so the complexity is N.
+    Complexity of insertion into pqs is LogN. beacuse we use swim after every insertion.
+    NlogN complexity for inserting array elements to pq's.
+* Then i delete arr.length - K values from minpq.
+* Then i delted k values from max pq. and stored in an array. then i sorted that array.
+    Complexity is log N. for deletion because we call sink after every deletion.
+* Then i stored remaining elements in minpq in to a string s1. N complexity beacuse we iterate loop.
+* then i stored deleted elements in maxpq to strinng s2.
+* Then i compared to strings. if they are equal i printed remianing k elements are largest. else i printed No.
+constant complexity for comparinng.        
