@@ -40,6 +40,7 @@ public class MaxHeap {
         int temp = pq[1];
         swap(1, size--);
         sink(1);
+        pq[size + 1] = 0;
         return temp;
     }
 

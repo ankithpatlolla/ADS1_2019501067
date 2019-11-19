@@ -9,4 +9,4 @@
 * Then i stored remaining elements in minpq in to a string s1. N complexity beacuse we iterate loop.
 * then i stored deleted elements in maxpq to strinng s2.
 * Then i compared to strings. if they are equal i printed remianing k elements are largest. else i printed No.
-constant complexity for comparinng.        
+constant complexity for comparinng.
