@@ -33,6 +33,7 @@ public class Solution {
 			ar1[i] = maxPQ.delete();
 		}
 
+		System.out.println(Arrays.toString(minPQ.pq));
 		Arrays.sort(ar1);
 		String s1 = ""; // string to store elements which are in minpq.
 		String s2 = ""; // String to store elements which are deleted from maxpq.

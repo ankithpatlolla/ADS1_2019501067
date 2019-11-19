@@ -1,3 +1,5 @@
+import java.util.*;
+import java.util.NoSuchElementException;
 class Node<Item> {
 	Item item;
 	Node<Item> next;
@@ -8,8 +10,8 @@ class Node<Item> {
 	}
 }
 public class Deque<Item> implements Iterable<Item>{
-	Node head;
-	Node tail;
+	Node<Item> head;
+	Node<Item> tail;
 	int size;
 
 	public Deque() {
@@ -31,7 +33,8 @@ public class Deque<Item> implements Iterable<Item>{
 	}
 
 	public void addFirst(Item item) {
-		Node node = new Node(item);
+		if (item == null) throw new IllegalArgumentException("empty deque");
+		Node<Item> node = new Node<Item>(item);
 		if (isEmpty()) {
 			head = node;
 			tail = head;
@@ -45,7 +48,8 @@ public class Deque<Item> implements Iterable<Item>{
 	}
 
 	public void addLast(Item item) {
-		Node node = new Node(item);
+		if (item == null) throw new IllegalArgumentException("empty deque");
+		Node<Item> node = new Node<Item>(item);
 		if (isEmpty()) {
 			tail = node;
 			head = tail;
@@ -60,43 +64,44 @@ public class Deque<Item> implements Iterable<Item>{
 
 	public Item removeFirst() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException("empty deque");
 		} else if (size == 1) {
-			Node temp = head;
+			Node<Item> temp = head;
 			head = null;
 			size--;
-			return temp;
+			return temp.item;
 		} else {
-			Node temp = head;
+			Node<Item> temp = head;
 			head = head.next;
 			size--;
-			return temp;
+			return temp.item;
 		}
 	}
 
 	public Item removeLast() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException("empty deque");
 	} else if (size == 1) {
-		Node temp = tail;
+		Node<Item> temp = tail;
 		tail = null;
 		size--;
-		return temp;
+		return temp.item;
 	} else {
-		Node temp = tail;
+		Node<Item> temp = tail;
 		tail = tail.previous;
 		size--;
-		return temp;
+		return temp.item;
 	}
+}
 
 	 public Iterator<Item> iterator()  {
-        return new ListIterator(first);  
+        return new ListIterator(head);  
     }
-    private class ListIterator implements Iterator<Item> {
-        private Node<Item> current;
+    public class ListIterator implements Iterator<Item> {
+        public Node<Item> current;
 
-        public ListIterator(Node<Item> first) {
-            current = first;
+        public ListIterator(Node<Item> head) {
+            current = head;
         }
 
         public boolean hasNext()  { return current != null;                     }
@@ -106,5 +111,15 @@ public class Deque<Item> implements Iterable<Item>{
             current = current.next; 
             return item;
         }
-    }
+	}
+	
+	public static void main(String[] args) {
+		Deque<Integer> d = new Deque<Integer>();
+		d.addFirst(2);
+		d.addLast(4);
+		d.addFirst(3);
+		d.addLast(8);
+		System.out.println(d.removeFirst());
+		System.out.println(d.removeLast());
+	}
 }
