@@ -1,6 +1,11 @@
-import java.util.*;
 import java.util.NoSuchElementException;
-class Node<Item> {
+import java.util.Iterator;
+public class Deque<Item> implements Iterable<Item>{
+	private Node<Item> head;
+	private Node<Item> tail;
+	private int size;
+
+	class Node<Item> {
 	Item item;
 	Node<Item> next;
 	Node<Item> previous;
@@ -9,10 +14,6 @@ class Node<Item> {
 		this.item = item;
 	}
 }
-public class Deque<Item> implements Iterable<Item>{
-	Node<Item> head;
-	Node<Item> tail;
-	int size;
 
 	public Deque() {
 		head = null;
@@ -41,7 +42,7 @@ public class Deque<Item> implements Iterable<Item>{
 			size++;
 			return;
 		}
-		Node temp = head;
+		Node<Item> temp = head;
 		head = node;
 		head.next = temp;
 		size++;
@@ -56,7 +57,7 @@ public class Deque<Item> implements Iterable<Item>{
 			size++;
 			return;
 		}
-		Node temp = tail;
+		Node<Item> temp = tail;
 		tail = node;
 		tail.previous = temp;
 		size++;
@@ -94,32 +95,37 @@ public class Deque<Item> implements Iterable<Item>{
 	}
 }
 
-	 public Iterator<Item> iterator()  {
-        return new ListIterator(head);  
+    public Iterator<Item> iterator() {
+        return new ListIterator();
     }
-    public class ListIterator implements Iterator<Item> {
-        public Node<Item> current;
 
-        public ListIterator(Node<Item> head) {
-            current = head;
+    private class ListIterator implements Iterator<Item> {
+        private Node current = first;
+
+        public boolean hasNext() {
+            return current != null;
         }
 
-        public boolean hasNext()  { return current != null;                     }
-        public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
-            Item item = current.item;
-            current = current.next; 
-            return item;
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
-	}
+
+        public Item next()
+        {
+            if (current == null) throw new NoSuchElementException();
+            Item value = current.item;
+            current = current.next;
+            return value;
+        }
+    }
 	
 	public static void main(String[] args) {
-		Deque<Integer> d = new Deque<Integer>();
-		d.addFirst(2);
-		d.addLast(4);
-		d.addFirst(3);
-		d.addLast(8);
-		System.out.println(d.removeFirst());
-		System.out.println(d.removeLast());
+		// Deque<Integer> d = new Deque<Integer>();
+		// d.addFirst(2);
+		// d.addLast(4);
+		// d.addFirst(3);
+		// d.addLast(8);
+		// System.out.println(d.removeFirst());
+		// System.out.println(d.removeLast());
 	}
 }

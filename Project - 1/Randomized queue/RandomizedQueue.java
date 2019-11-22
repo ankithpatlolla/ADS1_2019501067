@@ -1,64 +1,108 @@
-import java.util.*;
+import java.util.NoSuchElementException;
+import java.util.Iterator;
+import edu.princeton.cs.algs4.StdRandom;
+/**
+ * class randomizedqueue.
+ * @param <Item> generic type.
+ */
 public class RandomizedQueue<Item> implements Iterable<Item> {
-	Item[] arr;
-	int size;
-	int initialCapacity = 2;
+    private Item[] arr;
+    private int size;
+    private int initialCapacity = 2;
 
-	public RandomizedQueue () {
-		arr = (Item[]) new Object[initialCapacity];
-	}
-
-	public boolean isEmpty () {
-		if (size == 0) return true;
-		else return false;
-	}
-
-	public int size () {
-		return size;
-	}
-
-	public void resize(int capacity) {
-		Item[] temp = (Item[]) new Object[capacity];
-		for (int i = 0; i < arr.length; i++) {
-			temp[i] = arr[i];
-		}
-		arr =temp;
-	}
-	public void enqueue(Item item) {
-		if (item == null) throw new IllegalArgumentException("item can't be null");
-		if (size == arr.length) resize(size * 2);
-
-		arr[size++] = item;
-	}
-	public Item dequeue() {
-		if (isEmpty()) throw new NoSuchElementException("queue empty can't perform dequeue");
-		Item item = arr[0];
-		arr[0] = arr[size - 1];
-		arr[size -1] = null;
-		size--;
-
-		if (size > 0 && size = arr.length / 4) return resize(size / 2);
-	}
-
-	public Item sample() {
-		return arr[0];
-	}
-		 public Iterator<Item> iterator()  {
-        return new ListIterator(head);  
+    // constructor.
+    public RandomizedQueue() {
+        arr = (Item[]) new Object[initialCapacity];
     }
-    public class ListIterator implements Iterator<Item> {
-        public Node<Item> current;
+    
+    // boolean isempty method to check whether the randomized queue is empty or not.
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    // size to get size.
+    public int size() {
+        return size;
+    }
 
-        public ListIterator(Node<Item> head) {
-            current = head;
+    // resize to resize the array.
+    private void resize(int capacity) {
+        if (capacity >= size) { 
+            Item[] temp = (Item[]) new Object[capacity];
+            for (int i = 0; i < arr.length; i++) {
+                temp[i] = arr[i];
+            }
+            arr = temp;
+        }
+    }
+    // enqueue method to insert an item into queue.
+    public void enqueue(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException();
+        }
+        if (size == arr.length) {
+            resize(size * 2);
+        }
+        arr[size++] = item;
+    }
+    // deque method to remove an elelemt from queue.
+    public Item dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        int idx = rand();
+        // System.out.println(idx);
+        Item item = arr[idx];
+        arr[idx] = arr[size - 1];
+        arr[size - 1] = null;
+        size--;
+        if (size > 0 && size == arr.length / 4) {
+            resize(size / 2);
+        }
+        return item;
+    }
+
+    // rand to generate a random index in given range.
+    private int rand() {
+        return StdRandom.uniform(0, size);
+    }
+
+    // sample to get random item.
+    public Item sample() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return arr[rand()];
+    }
+
+    // iterator.
+    public Iterator<Item> iterator() {
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<Item> {
+        private int i = 0;
+        public boolean hasNext()  {
+            return i < size;
+        }
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
 
-        public boolean hasNext()  { return current != null;                     }
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
-            Item item = current.item;
-            current = current.next; 
-            return item;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return arr[i++];
         }
-	}
+    }
+    public static void main(String[] args) {
+        // RandomizedQueue<Integer> q = new RandomizedQueue<>();
+        // q.enqueue(4);
+        // q.enqueue(6);
+        // q.enqueue(5);
+        // q.enqueue(10);
+        // System.out.println(q.dequeue());
+        // System.out.println(q.dequeue());
+        // System.out.println(q.dequeue());
+    }
 }
